@@ -1,0 +1,12 @@
+bin/
+tmp/
+.idea/
+*.tmp
+*.bak
+*.swp
+*~.nib
+logs/
+MCInputAll.iml
+.gradle/
+build/
+eclipse/

@@ -1,0 +1,33 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.1-SNAPSHOT'
+    }
+}
+
+apply plugin: 'forge'
+
+version = "1.0"
+group= "com.eyougo.mcmods.MCInputAll" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "MCInputAll"
+
+minecraft {
+    version = "1.7.2-10.12.0.1005"
+}
+
+jar{
+    manifest {
+        attributes 'FMLCorePlugin': 'com.eyougo.mcmods.mcinputall.MCInputAll'
+    }
+}
+
