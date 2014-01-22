@@ -2,17 +2,20 @@ package com.eyougo.mcmods.mcinputall;
 
 import cpw.mods.fml.common.FMLLog;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiTextField;
 import org.apache.logging.log4j.Level;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
 import scala.Char;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /**
@@ -21,6 +24,11 @@ import java.lang.reflect.Method;
  * Time: 10:26
  */
 public class GuiTextFieldFix {
+//    private static Field lX;
+//    private static Field lY;
+//    private static Field rX;
+//    private static Field rY;
+//    private static Field fontRenderer;
     private static Method keyTyped;
     private static JFrame textFrame;
     private static JTextField textField;
@@ -31,6 +39,16 @@ public class GuiTextFieldFix {
         {
             keyTyped = GuiTextField.class.getDeclaredMethod("func_146201_a", char.class, int.class);
             keyTyped.setAccessible(true);
+//            fontRenderer = GuiTextField.class.getDeclaredField("field_146211_a");
+//            fontRenderer.setAccessible(true);
+//            lX = GuiTextField.class.getDeclaredField("field_146209_f");
+//            lX.setAccessible(true);
+//            lY = GuiTextField.class.getDeclaredField("field_146210_g");
+//            lY.setAccessible(true);
+//            rX = GuiTextField.class.getDeclaredField("field_146218_h");
+//            rX.setAccessible(true);
+//            rY = GuiTextField.class.getDeclaredField("field_146219_i");
+//            rY.setAccessible(true);
         }
         catch (Throwable t)
         {
@@ -43,15 +61,17 @@ public class GuiTextFieldFix {
         if (textFrame == null){
             textFrame = new JFrame();
             textFrame.setUndecorated(true);
+            textFrame.setBackground(new Color(0, 0, 0, 0));
             textFrame.getContentPane().setLayout(new java.awt.FlowLayout());
-            textField = new JTextField(30);
-            textField.setFont(new Font("SansSerif", 0, 12));
-            textField.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
+            textField = new JTextField(50);
+            textField.setFont(new Font("SansSerif", 0, 16));
+            textField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
             textField.setVisible(true);
             textFrame.getContentPane().add(textField, "South");
             textFrame.pack();
-            textFrame.setLocation(Mouse.getX(), Mouse.getY());
             textFrame.setVisible(true);
+
+            textFrame.setLocation(Display.getX(), Display.getY() + Display.getHeight() - 8);
             InputMap im = textField.getInputMap();
             im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enter");
             im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "escape");

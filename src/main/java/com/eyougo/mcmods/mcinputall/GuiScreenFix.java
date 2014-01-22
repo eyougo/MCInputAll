@@ -1,7 +1,6 @@
 package com.eyougo.mcmods.mcinputall;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
