@@ -29,32 +29,8 @@ public class GuiTextFieldFix {
 //    private static Field rX;
 //    private static Field rY;
 //    private static Field fontRenderer;
-    private static Method keyTyped;
     private static JFrame textFrame;
     private static JTextField textField;
-
-    static
-    {
-        try
-        {
-            keyTyped = GuiTextField.class.getDeclaredMethod("func_146201_a", char.class, int.class);
-            keyTyped.setAccessible(true);
-//            fontRenderer = GuiTextField.class.getDeclaredField("field_146211_a");
-//            fontRenderer.setAccessible(true);
-//            lX = GuiTextField.class.getDeclaredField("field_146209_f");
-//            lX.setAccessible(true);
-//            lY = GuiTextField.class.getDeclaredField("field_146210_g");
-//            lY.setAccessible(true);
-//            rX = GuiTextField.class.getDeclaredField("field_146218_h");
-//            rX.setAccessible(true);
-//            rY = GuiTextField.class.getDeclaredField("field_146219_i");
-//            rY.setAccessible(true);
-        }
-        catch (Throwable t)
-        {
-            throw new RuntimeException(t);
-        }
-    }
 
     public static synchronized void createTextFrame(GuiTextField guiTextField){
 
@@ -79,6 +55,8 @@ public class GuiTextFieldFix {
             ActionMap am = textField.getActionMap();
             am.put("enter", new EnterAction(guiTextField));
             am.put("escape", new EscapeAction());
+
+            FMLLog.log(Level.INFO, "init text input");
         }
     }
 
