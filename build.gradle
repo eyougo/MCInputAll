@@ -15,9 +15,19 @@ buildscript {
     }
 }
 
+apply plugin: 'java'
 apply plugin: 'forge'
 
-version = "1.0"
+
+dependencies {
+    compile 'net.minecraftforge:forge:1.7.2-10.12.0.1005-mcp'
+    compile 'org.lwjgl.lwjgl:lwjgl:2.9.1'
+    compile 'org.lwjgl.lwjgl:lwjgl-platform:lwjgl-platform-2.9.1-natives-osx'
+    compile 'org.lwjgl.lwjgl:lwjgl_util:2.9.1'
+}
+
+
+version = "1.1"
 group= "com.eyougo.mcmods.MCInputAll" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "MCInputAll"
 

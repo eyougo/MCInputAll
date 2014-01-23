@@ -14,6 +14,8 @@ import scala.Char;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -40,14 +42,24 @@ public class GuiTextFieldFix {
             textFrame.setBackground(new Color(0, 0, 0, 0));
             textFrame.getContentPane().setLayout(new java.awt.FlowLayout());
             textField = new JTextField(50);
-            textField.setFont(new Font("SansSerif", 0, 16));
             textField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+            textField.setFont(new Font("SansSerif", 0, 16));
+            textField.addFocusListener(new FocusAdapter() {
+                public void focusLost(FocusEvent e) {
+                    if (textFrame != null){
+                        textFrame.dispose();
+                        textFrame = null;
+                        GuiScreenFix.keyTyped((char)Keyboard.KEY_ESCAPE,Keyboard.KEY_ESCAPE);
+                    }
+                }
+            });
             textField.setVisible(true);
             textFrame.getContentPane().add(textField, "South");
             textFrame.pack();
             textFrame.setVisible(true);
-
-            textFrame.setLocation(Display.getX(), Display.getY() + Display.getHeight() - 8);
+            textFrame.setAlwaysOnTop(true);
+            textFrame.setLocation(Display.getX(), Display.getY() + Display.getHeight() - 4);
+            textField.requestFocus();
             InputMap im = textField.getInputMap();
             im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enter");
             im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "escape");
